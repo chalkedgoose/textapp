@@ -1,5 +1,6 @@
 import React from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
+import showdown from 'showdown';
 import 'draft-js/dist/Draft.css';
 import { Grommet, grommet, Box, Heading, Text } from 'grommet';
 
