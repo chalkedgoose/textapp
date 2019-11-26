@@ -1,26 +1,50 @@
 import React from 'react';
-import { Editor, EditorState, ContentState } from 'draft-js';
-import showdown from 'showdown';
+import { Editor, EditorState, ContentState, convertToRaw } from 'draft-js';
+import Showdown from 'showdown';
 import 'draft-js/dist/Draft.css';
-import { Grommet, grommet, Box, Heading, Text } from 'grommet';
+import { Grommet, grommet, Box, Heading, Text, Button, FormField, TextInput } from 'grommet';
 
 function App() {
-  const [editorState, setEditorState] = React.useState(EditorState.createWithContent(ContentState.createFromText('Hello this is an example editor')));
+  const converter = new Showdown.Converter();
+  const [editorState, setEditorState] = React.useState(EditorState.createWithContent(ContentState.createFromText('### Hello this is an example editor')));
+  const [fileName, setFileName] = React.useState('editor_file.txt')
+  const convertToUsable = () => {
+    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+    return blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+  }
   return (
-    <Grommet theme={grommet} >
+    <Grommet full theme={grommet} >
       <Box direction="column" justify="center" align="center" >
         <Heading>
-          Text Editor Example.
+          Custom Markdown Editor Example.
           </Heading>
         <Text>
           Messing around with React Hooks and Draft.js a WSGI tool
           from Facebook Open Source.
           </Text>
-        <Box margin="medium" border="all" width="large" height="medium" >
-          <Editor editorState={editorState} onChange={setEditorState} />
+        <Box margin="small" width="large">
+          <FormField label="Filename">
+            <TextInput value={fileName} onChange={(e) => { setFileName(e.target.value) }} placeholder="editor_file.txt" />
+          </FormField>
         </Box>
-        <Box margin="medium" border="all" width="large" height="medium" >
-
+        <Box align="center" justify="center" pad="medium" fill="horizontal" className="editors-holder" >
+          <Box className="leftside" >
+            <Box margin="medium" border="all" width="large" height="medium" >
+              <Editor editorState={editorState} onChange={setEditorState} />
+            </Box>
+            <Box width="large" >
+              <Button alignSelf="end" primary label="Download Markdown" onClick={() => { console.log('hello md') }} />
+            </Box>
+          </Box>
+          <Box className="rightside" >
+            <Box margin="medium" border="all" width="large" height="medium" >
+              <div dangerouslySetInnerHTML={{ __html: converter.makeHtml(convertToUsable()) }} >
+              </div>
+            </Box>
+            <Box width="large">
+              <Button alignSelf="end" primary label="Download HTML" onClick={() => { console.log('hello md') }} />
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Grommet>
