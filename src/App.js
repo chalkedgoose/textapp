@@ -18,6 +18,9 @@ function App() {
         <Box margin="medium" border="all" width="large" height="medium" >
           <Editor editorState={editorState} onChange={setEditorState} />
         </Box>
+        <Box margin="medium" border="all" width="large" height="medium" >
+
+        </Box>
       </Box>
     </Grommet>
   );
