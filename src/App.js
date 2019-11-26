@@ -16,7 +16,7 @@ function App() {
           from Facebook Open Source.
           </Text>
         <Box margin="medium" border="all" width="large" height="medium" >
-          <Editor editorState={editorState} onChange={setEditorState}  plugins={[hashtagPlugin]} />
+          <Editor editorState={editorState} onChange={setEditorState} />
         </Box>
       </Box>
     </Grommet>
