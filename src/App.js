@@ -4,7 +4,7 @@ import 'draft-js/dist/Draft.css';
 import { Grommet, grommet, Box, Heading, Text } from 'grommet';
 
 function App() {
-  const [editorState, setEditorState] = React.useState(EditorState.createWithContent(ContentState.createFromText('Hello')));
+  const [editorState, setEditorState] = React.useState(EditorState.createWithContent(ContentState.createFromText('Hello this is an example editor')));
   return (
     <Grommet theme={grommet} >
       <Box direction="column" justify="center" align="center" >
@@ -15,7 +15,7 @@ function App() {
           Messing around with React Hooks and Draft.js a WSGI tool
           from Facebook Open Source.
           </Text>
-        <Box>
+        <Box margin="medium" border="all" width="large" height="medium" >
           <Editor editorState={editorState} onChange={setEditorState} />
         </Box>
       </Box>
