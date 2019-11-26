@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Editor, EditorState } from 'draft-js';
+import { Grommet, grommet, Box, Heading, Text } from 'grommet';
 
 function App() {
+  const [editorState, setEditorState] = React.useState(EditorState.createEmpty());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={grommet} >
+      <Box direction="column" justify="center" align="center" >
+        <Heading>
+          Text Editor Example.
+          </Heading>
+        <Text>
+          Messing around with React Hooks and Draft.js a WSGI tool
+          from Facebook Open Source.
+          </Text>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </Box>
+    </Grommet>
   );
 }
 
