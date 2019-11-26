@@ -2,7 +2,7 @@ import React from 'react';
 import { Editor, EditorState, ContentState, convertToRaw } from 'draft-js';
 import Showdown from 'showdown';
 import 'draft-js/dist/Draft.css';
-import { Grommet, grommet, Box, Heading, Text, Button, FormField, TextInput } from 'grommet';
+import { Grommet, grommet, Box, Heading, Text } from 'grommet';
 
 function App() {
   const converter = new Showdown.Converter();
